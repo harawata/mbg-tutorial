@@ -70,4 +70,39 @@ public class MbgTutorialTest {
         }
     }
 
+    @Test
+    public void getAPersonWithPetsByPrimaryKey() {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            PersonMapper personMapper = sqlSession
+                    .getMapper(PersonMapper.class);
+            Person person = personMapper.selectPersonAndPetsByPrimaryKey(1);
+            assertEquals("yamada tarou", person.getName());
+            assertEquals(2, person.getPets().size());
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void getAPersonWithPetsByExample() {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            PersonMapper personMapper = sqlSession
+                    .getMapper(PersonMapper.class);
+            PersonExample example = new PersonExample();
+            example.createCriteria().andNameLike("yamada%");
+            example.setOrderByClause("id");
+            List<Person> persons = personMapper.selectPersonAndPetsByExample(example);
+            assertEquals(2, persons.size());
+            Person person1 = persons.get(0);
+            assertEquals("yamada tarou", person1.getName());
+            assertEquals(2, person1.getPets().size());
+            Person person2 = persons.get(1);
+            assertEquals("yamada hanako", person2.getName());
+            assertEquals(3, person2.getPets().size());
+        } finally {
+            sqlSession.close();
+        }
+    }
 }
