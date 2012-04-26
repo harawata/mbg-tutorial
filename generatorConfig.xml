@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration 
+	PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry location="/Volumes/y/repo/m2_repo/mysql/mysql-connector-java/5.1.18/mysql-connector-java-5.1.18.jar"/>
+	<context id="context1">
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1/mbgtutorial" userId="root"
+			password="" />
+		<javaModelGenerator targetPackage="net.harawata.domain"
+			targetProject="mbg-tutorial" />
+		<sqlMapGenerator targetPackage="net.harawata.mapper"
+			targetProject="mbg-tutorial/src/main/resources" />
+		<javaClientGenerator targetPackage="net.harawata.mapper"
+			targetProject="mbg-tutorial" type="XMLMAPPER" />
+		<table tableName="person" />
+		<table tableName="pet" />
+	</context>
+</generatorConfiguration>
