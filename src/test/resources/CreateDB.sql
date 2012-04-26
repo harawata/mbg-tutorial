@@ -3,6 +3,7 @@ CREATE TABLE person (
   id int,
   name varchar(32),
   gender varchar(8),
+  email varchar(255),
   PRIMARY KEY (id)
 );
 
@@ -14,8 +15,8 @@ CREATE TABLE pet (
   PRIMARY KEY (pet_id)
 );
 
-INSERT INTO person (id, name, gender) VALUES (1, 'yamada tarou', 'male');
-INSERT INTO person (id, name, gender) VALUES (2, 'yamada hanako', 'female');
+INSERT INTO person (id, name, gender, email) VALUES (1, 'yamada tarou', 'male', 'tarou@example.com');
+INSERT INTO person (id, name, gender, email) VALUES (2, 'yamada hanako', 'female', 'hanako@example.com');
 
 INSERT INTO pet (pet_id, owner_id, pet_name) VALUES (11, 1, 'taro');
 INSERT INTO pet (pet_id, owner_id, pet_name) VALUES (12, 1, 'jiro');

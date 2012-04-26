@@ -48,6 +48,7 @@ public class MbgTutorialTest {
             Person person = personMapper.selectByPrimaryKey(1);
             assertEquals("yamada tarou", person.getName());
             assertEquals("male", person.getGender());
+            assertEquals("tarou@example.com", person.getEmail());
         } finally {
             sqlSession.close();
         }
@@ -79,6 +80,7 @@ public class MbgTutorialTest {
             Person person = personMapper.selectPersonAndPetsByPrimaryKey(1);
             assertEquals("yamada tarou", person.getName());
             assertEquals(2, person.getPets().size());
+            assertEquals("tarou@example.com", person.getEmail());
         } finally {
             sqlSession.close();
         }
@@ -100,6 +102,7 @@ public class MbgTutorialTest {
             assertEquals(2, person1.getPets().size());
             Person person2 = persons.get(1);
             assertEquals("yamada hanako", person2.getName());
+            assertEquals("hanako@example.com", person2.getEmail());
             assertEquals(3, person2.getPets().size());
         } finally {
             sqlSession.close();
