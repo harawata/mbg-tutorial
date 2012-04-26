@@ -108,4 +108,22 @@ public class MbgTutorialTest {
             sqlSession.close();
         }
     }
+
+    @Test
+    public void getAPersonWithPetsByPetsName() {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            PersonMapper personMapper = sqlSession
+                    .getMapper(PersonMapper.class);
+            PersonExample example = new PersonExample();
+            example.createCriteria().andPetNameEqualTo("pochi");
+            List<Person> persons = personMapper
+                    .selectPersonAndPetsByExample(example);
+            assertEquals(1, persons.size());
+            Person person = persons.get(0);
+            assertEquals(Integer.valueOf(2), person.getId());
+        } finally {
+            sqlSession.close();
+        }
+    }
 }
