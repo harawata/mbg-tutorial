@@ -238,4 +238,33 @@
       gender = #{gender,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap extends="BaseResultMap" id="personWithPetsMap" type="net.harawata.domain.Person">
+    <collection property="pets" resultMap="net.harawata.mapper.PetMapper.BaseResultMap" />
+  </resultMap>
+
+  <select id="selectPersonAndPetsByPrimaryKey" parameterType="net.harawata.domain.PersonExample" resultMap="personWithPetsMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="net.harawata.mapper.PetMapper.Base_Column_List" />
+    from person
+    left join pet on pet.owner_id = id
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectPersonAndPetsByExample" parameterType="net.harawata.domain.PersonExample" resultMap="personWithPetsMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="net.harawata.mapper.PetMapper.Base_Column_List" />
+    from person
+    left join pet on pet.owner_id = id
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
 </mapper>

@@ -96,4 +96,8 @@ public interface PersonMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Person record);
+
+    Person selectPersonAndPetsByPrimaryKey(Integer id);
+
+    List<Person> selectPersonAndPetsByExample(PersonExample example);
 }
