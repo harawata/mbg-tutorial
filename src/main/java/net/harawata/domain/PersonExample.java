@@ -573,5 +573,10 @@ public class PersonExample {
         protected Criteria() {
             super();
         }
+
+        public Criteria andPetNameEqualTo(String value) {
+            addCriterion("pet_name =", value, "pet_name");
+            return (Criteria) this;
+        }
     }
 }
